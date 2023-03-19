@@ -5,7 +5,7 @@ const {SECRET_KEY} = process.env
 
 
 async function register(req, res ) {
-        
+
         try {
                 const {name, email, password} = req.body;
 
@@ -24,4 +24,29 @@ async function register(req, res ) {
         }
 }
 
-module.exports = {register}
+
+async function login(req, res) {
+        try {
+                const {email, password} = req.body
+
+                const user = await User.findOne({ where: { email }});
+                console.log(user)
+
+                if(!user) res.status(404).json({status: false, data:{message: "user not found"}})
+
+                const match = await bcrypt.compare(password, user.password);
+
+                if(!match) res.status(401).json({ status: false, data: {message: 'Invalid Credentials '}})
+
+                const token = jwt.sign({ userId: user.id}, SECRET_KEY)
+
+                res.status(200).json({status: true, message: "User logged in successfully", data: {token}})
+        }
+
+        catch(err) {
+                res.status(500).json({status: false, message: "an error occured", data: {err}})
+        }
+}
+
+
+module.exports = {register, login}
