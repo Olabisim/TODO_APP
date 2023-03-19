@@ -16,4 +16,18 @@ async function createTodo(req, res) {
 }
 
 
-module.exports = {createTodo}
+async function retrieveTodo(_, res) {
+
+        try {
+                const allTodos = await Todo.findAll()
+
+                res.status(200).json({status: true, message: "todos data fetched", data: {todos: allTodos}})
+        }
+        catch(err) {
+                res.status(500).json({status: false, message: "message could not be retrieved", data: {err}})
+        }
+
+}
+
+
+module.exports = {createTodo, retrieveTodo}
