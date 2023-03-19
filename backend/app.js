@@ -1,12 +1,14 @@
 const sequelizeImport = require('./utils/db')
 const express = require('express')
 const authRoutes = require('./routes/authRoutes')
+const todoRoutes = require('./routes/todoRoutes')
 const app = express()
 
 
 app.use(express.json())
 
 app.use('/', authRoutes)
+app.use('/', todoRoutes)
 
 
 async function checkseq() {
