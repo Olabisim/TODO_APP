@@ -1,9 +1,12 @@
 const sequelizeImport = require('./utils/db')
 const express = require('express')
+const authRoutes = require('./routes/authRoutes')
 const app = express()
 
 
 app.use(express.json())
+
+app.use( '/', authRoutes)
 
 
 async function checkseq() {
