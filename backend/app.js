@@ -3,7 +3,11 @@ const express = require('express')
 const authRoutes = require('./routes/authRoutes')
 const todoRoutes = require('./routes/todoRoutes')
 const app = express()
+const cors = require('cors')
 
+
+app.use(cors())
+app.options("*", cors())
 
 app.use(express.json())
 
