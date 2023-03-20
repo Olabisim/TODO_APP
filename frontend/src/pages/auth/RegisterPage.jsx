@@ -38,7 +38,7 @@ export const RegisterPage = () => {
         console.log(data)
 
         if(data?.status) {
-                navigate('/home')
+                navigate('/todos')
                 // toast.success(data?.data.message)
         }
 
