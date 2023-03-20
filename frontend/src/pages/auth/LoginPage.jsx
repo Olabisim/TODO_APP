@@ -6,11 +6,15 @@ import { useQuery } from "react-query"
 import { useState } from "react"
 // import { toast } from 'react-toastify'
 import {useNavigate} from 'react-router-dom'
+import { useAppDispatch } from "../../app/hooks"
+import { setUser } from "../../features/user/userSlice"
 
 
 export const LoginPage = () => {
 
         const navigate = useNavigate('')
+
+        const dispatch = useAppDispatch()
 
         // const [loading, setLoading]
         const [email, setEmail] = useState('')
@@ -37,6 +41,7 @@ export const LoginPage = () => {
         console.log(data)
 
         if(data?.status) {
+                dispatch(setUser(data.data))
                 navigate('/todos')
                 // toast.success(data?.data.message)
         }
