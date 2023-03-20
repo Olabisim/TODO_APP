@@ -32,15 +32,16 @@ async function login(req, res) {
                 const user = await User.findOne({ where: { email }});
                 console.log(user)
 
-                if(!user) res.status(404).json({status: false, data:{message: "user not found"}})
+                if(!user) return res.status(404).json({status: false, data:{message: "user not found"}})
 
                 const match = await bcrypt.compare(password, user.password);
+                
 
-                if(!match) res.status(401).json({ status: false, data: {message: 'Invalid Credentials '}})
+                if(!match) return res.status(401).json({ status: false, data: {message: 'Invalid Credentials '}})
 
                 const token = jwt.sign({ userId: user.id}, SECRET_KEY)
 
-                res.status(200).json({status: true, message: "User logged in successfully", data: {token}})
+                return res.status(200).json({status: true, message: "User logged in successfully", data: {token}})
         }
 
         catch(err) {

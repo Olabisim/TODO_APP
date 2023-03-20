@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Routes from './routes/index'
 import './index.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 
 function App() {

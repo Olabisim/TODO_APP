@@ -2,9 +2,52 @@ import { Button } from "../../components/Button"
 import { InputField, PasswordInput } from "../../components/Input"
 import {AiTwotoneAlert} from 'react-icons/ai'
 import { Link } from "react-router-dom"
+import { useQuery } from "react-query"
+import { useState } from "react"
+// import { toast } from 'react-toastify'
+import {useNavigate} from 'react-router-dom'
 
 
 export const LoginPage = () => {
+
+        const navigate = useNavigate('')
+
+        // const [loading, setLoading]
+        const [email, setEmail] = useState('')
+        const [password, setPassword] = useState('')
+
+        const options = {
+                method: 'POST',
+                headers: {
+                        "Content-Type": "application/json", "Accept": "application/json"
+                },
+                body: JSON.stringify({email, password})
+        }
+
+        const {isLoading, data, refetch} = useQuery('login', () => (
+                fetch('http://localhost:8080/login/', options).then(res => res.json())
+        ),{enabled: false})
+
+
+        const handleClick = () => {
+                refetch()
+        }
+
+        console.log("data")
+        console.log(data)
+
+        if(data?.status) {
+                navigate('/home')
+                // toast.success(data?.data.message)
+        }
+
+        if(data?.status === false) {
+                // toast.error(data?.data.message)
+        }
+
+
+
+
         return (
                 <div className="">
                         <section className="bg-gray-50">
@@ -21,7 +64,7 @@ export const LoginPage = () => {
                                                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                                         Sign in to your account
                                                 </h1>
-                                                <form className="space-y-4 md:space-y-6" action="#">
+                                                <div className="space-y-4 md:space-y-6">
 
                                                 <InputField
                                                         required
@@ -29,6 +72,7 @@ export const LoginPage = () => {
                                                         type="email"
                                                         name="email"
                                                         makeWhite
+                                                        onChange={(e) => setEmail(e.target.value)}
                                                         
                                                 />
 
@@ -38,15 +82,16 @@ export const LoginPage = () => {
                                                         type="password"
                                                         name="password"
                                                         makeWhite
+                                                        onChange={(e) => setPassword(e.target.value)}
                                                 />
 
                                                         
-                                                        <Button buttonText="Submit" loading={false} /> 
+                                                <Button buttonText="Submit" loading={isLoading} onClick={handleClick} /> 
                                                         
                                                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                                                Don’t have an account yet? <Link to="/signup"><a href="#dasd" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a></Link> 
+                                                                Don’t have an account yet? <Link to="/signup"><span href="#dasd" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</span></Link> 
                                                         </p>
-                                                </form>
+                                                </div>
                                         </div>
                                 </div>
                                 </div>

@@ -1,13 +1,19 @@
 
 import {Routes, Route} from 'react-router'
 import { LoginPage } from '../pages/auth/LoginPage.jsx'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+
+const queryClient = new QueryClient()
 
 const Routerss = () => {
 
         return (
-                <Routes>
-                        <Route path="/" element={<LoginPage />} />
-                </Routes>
+                <QueryClientProvider client={queryClient}>
+                        <Routes>
+                                        <Route path="/" element={<LoginPage />} />
+                        </Routes>
+                 </QueryClientProvider>
         )
 }
 
