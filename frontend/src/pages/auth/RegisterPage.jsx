@@ -8,11 +8,12 @@ import { useState } from "react"
 import {useNavigate} from 'react-router-dom'
 
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
 
         const navigate = useNavigate('')
 
         // const [loading, setLoading]
+        const [name, setName] = useState('')
         const [email, setEmail] = useState('')
         const [password, setPassword] = useState('')
 
@@ -21,11 +22,11 @@ export const LoginPage = () => {
                 headers: {
                         "Content-Type": "application/json", "Accept": "application/json"
                 },
-                body: JSON.stringify({email, password})
+                body: JSON.stringify({name, email, password})
         }
 
         const {isLoading, data, refetch} = useQuery('login', () => (
-                fetch('http://localhost:8080/login/', options).then(res => res.json())
+                fetch('http://localhost:8080/register/', options).then(res => res.json())
         ),{enabled: false})
 
 
@@ -62,16 +63,28 @@ export const LoginPage = () => {
                                 <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                                                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                                                        Sign in to your account
+                                                        Sign up for a pro account
                                                 </h1>
                                                 <div className="space-y-4 md:space-y-6">
 
+                                                <InputField
+                                                        required
+                                                        label="Your name"
+                                                        type="text"
+                                                        name="name"
+                                                        makeWhite
+                                                        value={name}
+                                                        onChange={(e) => setName(e.target.value)}
+                                                        
+                                                />
+                                                
                                                 <InputField
                                                         required
                                                         label="Your email"
                                                         type="email"
                                                         name="email"
                                                         makeWhite
+                                                        value={email}
                                                         onChange={(e) => setEmail(e.target.value)}
                                                         
                                                 />
@@ -82,6 +95,7 @@ export const LoginPage = () => {
                                                         type="password"
                                                         name="password"
                                                         makeWhite
+                                                        value={password}
                                                         onChange={(e) => setPassword(e.target.value)}
                                                 />
 
@@ -89,7 +103,7 @@ export const LoginPage = () => {
                                                 <Button buttonText="Submit" loading={isLoading} onClick={handleClick} /> 
                                                         
                                                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                                                Don’t have an account yet? <Link to="/register"><span href="#dasd" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</span></Link> 
+                                                                have an account? <Link to="/"><span href="#dasd" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign In</span></Link> 
                                                         </p>
                                                 </div>
                                         </div>
