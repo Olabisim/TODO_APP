@@ -1,0 +1,15 @@
+
+.loading-spinner {
+        margin: 10px auto;
+        border: 3px solid #fff; /* Light grey */
+        border-top: 3px solid #4c8af6; /* Blue */
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        animation: spin 1.2s linear infinite;
+      }
+      
+      .loading-spinner-big {
+        width: 100px;
+        height: 100px;
+      }

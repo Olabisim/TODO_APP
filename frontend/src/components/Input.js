@@ -18,6 +18,7 @@ export const InputField = forwardRef(
             readOnly,
             errors,
             props,
+            makeWhite
         },
         ref
     ) => {
@@ -26,7 +27,9 @@ export const InputField = forwardRef(
                 <label
                     htmlFor=''
                     className='relative text-sm font-medium text-normal md:text-base'>
-                    {label}{" "}
+                    <span className={`${makeWhite ? 'text-white' : 'text-black'}`}>
+                        {label}{" "}
+                    </span>
                     {required && (
                         <span
                             style={{
@@ -80,6 +83,7 @@ export const PasswordInput = forwardRef(
             label,
             errors,
             props,
+            makeWhite
         },
         ref
     ) => {
@@ -89,7 +93,9 @@ export const PasswordInput = forwardRef(
                 <label
                     htmlFor=''
                     className='relative text-sm font-medium text-normal md:text-base'>
-                    {label}{" "}
+                    <span className={`${makeWhite ? 'text-white' : 'text-black'}`}>
+                        {label}{" "}
+                    </span>
                     {required && (
                         <span className='absolute text-3xl md:text-5xl w-10 ml-5 -mt-0.5 text-rose-600'>
                             *

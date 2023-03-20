@@ -1,6 +1,6 @@
 
 import {Routes, Route} from 'react-router'
-import { LoginPage } from '../pages/auth/LoginPage'
+import { LoginPage } from '../pages/auth/LoginPage.jsx'
 
 const Routerss = () => {
 

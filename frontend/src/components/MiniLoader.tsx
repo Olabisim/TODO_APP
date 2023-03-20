@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/loader.css'
+import '../assets/css/loader.css'
 
 const MiniLoader = () => {
 	return <div className="loading-spinner"></div>;
