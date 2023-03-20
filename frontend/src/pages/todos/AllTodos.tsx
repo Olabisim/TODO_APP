@@ -1,6 +1,7 @@
 
 import {useQuery} from 'react-query'
 import {useMemo, useState} from 'react'
+import {Link} from 'react-router-dom'
 
 export const AllTodos = () => {
 
@@ -31,6 +32,8 @@ export const AllTodos = () => {
                                         {each.completed}
                                 </div>
                         ))}
+
+                        <Link to="/createTodos"><span className='mt-32 bg-black px-3 py-1 text-white'>Create a Todo</span></Link>
                 </div>
         )
 }
