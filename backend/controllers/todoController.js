@@ -7,11 +7,11 @@ async function createTodo(req, res) {
 
                 const todo = await Todo.create({title, completed})
 
-                res.status(201).json({status: true, message: "a todo created successfully", data: {todo}})
+                return res.status(201).json({status: true, message: "a todo created successfully", data: {todo}})
 
         }
         catch(err) {
-                res.status(500).json({status: false, message: "todo not created", data: {err}})
+                return res.status(500).json({status: false, message: "todo not created", data: {err}})
         }
 }
 
@@ -21,10 +21,10 @@ async function retrieveTodo(_, res) {
         try {
                 const allTodos = await Todo.findAll()
 
-                res.status(200).json({status: true, message: "todos data fetched", data: {todos: allTodos}})
+                return res.status(200).json({status: true, message: "todos data fetched", data: {todos: allTodos}})
         }
         catch(err) {
-                res.status(500).json({status: false, message: "message could not be retrieved", data: {err}})
+                return res.status(500).json({status: false, message: "message could not be retrieved", data: {err}})
         }
 
 }
@@ -38,11 +38,11 @@ async function updateTodo(req, res) {
 
                 todo.set({title, completed})
 
-                res.status(200).json({status: true, message: 'todo updated successfully'})
+                return res.status(200).json({status: true, message: 'todo updated successfully'})
 
         }
         catch(err) {
-                res.status(500).json({status: false, message: "todo could not be updated", data: {err}})
+                return res.status(500).json({status: false, message: "todo could not be updated", data: {err}})
         }
 }
 
@@ -53,11 +53,11 @@ async function deleteTodo(req, res) {
 
                 const todo = Todo.Destroy({where: {id}})
 
-                res.status(200).json({status: true, message: 'todo deleted successfully', data: {todo}})
+                return res.status(200).json({status: true, message: 'todo deleted successfully', data: {todo}})
 
         }
         catch(err) {
-                res.status(500).json({status: false, message: "todo could not be delete", data: {err}})
+                return res.status(500).json({status: false, message: "todo could not be delete", data: {err}})
         }
 
 }

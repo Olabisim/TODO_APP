@@ -17,10 +17,10 @@ async function register(req, res ) {
 
                 const token = jwt.sign({userId: user.id}, SECRET_KEY)
 
-                res.status(201).json({status: true, message: "User resgistered succesfully", data: {token}})
+                return res.status(201).json({status: true, message: "User resgistered succesfully", data: {token}})
         }
         catch(err) {
-                res.status(500).json({status: false, message: "error while registering a user", data: {err}})
+                return res.status(500).json({status: false, message: "error while registering a user", data: {err}})
         }
 }
 
@@ -45,7 +45,7 @@ async function login(req, res) {
         }
 
         catch(err) {
-                res.status(500).json({status: false, message: "an error occured", data: {err}})
+                return res.status(500).json({status: false, message: "an error occured", data: {err}})
         }
 }
 
