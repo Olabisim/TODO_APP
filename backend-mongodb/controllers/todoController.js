@@ -40,3 +40,38 @@ export const getAllTodo = catchAsync(async (req, res, next) => {
                 },
         });
 });
+
+export const UpdateTodo = catchAsync(async (req, res, next) => {
+
+        const {id: paramsId} = req.params
+
+        const data = req.body;
+        
+        const updateTodo = await Todo.findByIdAndUpdate(paramsId, data, {new: true});
+
+        if(!updateTodo) return res.status(400).json({status: false, message: "cannot update todo"})
+      
+        res.status(200).json({
+                status: 'success',
+                data: {
+                        updateTodo,
+                },
+        });
+});
+
+
+export const deleteTodo = catchAsync(async (req, res, next) => {
+
+        const {id} = req.params
+        
+        const deleteTodo = await Todo.findByIdAndRemove(id);
+
+        if(!deleteTodo) return res.status(400).json({status: false, message: "cannot delete todo"})
+      
+        res.status(200).json({
+                status: 'success',
+                data: {
+                        deleteTodo,
+                },
+        });
+});
