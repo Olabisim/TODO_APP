@@ -12,7 +12,7 @@ import { setUser } from "../../features/user/userSlice"
 
 export const LoginPage = () => {
 
-        const navigate = useNavigate('')
+        const navigate = useNavigate()
 
         const dispatch = useAppDispatch()
 

@@ -5,6 +5,9 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { RegisterPage } from '../pages/auth/RegisterPage.jsx'
 import { AllTodos } from '../pages/todos/AllTodos'
 import { CreateTodo } from '../pages/todos/Create'
+import ErrorBoundary from '../ErrorBoundary'
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Support } from './Support'
 
 
 const queryClient = new QueryClient()
@@ -12,14 +15,18 @@ const queryClient = new QueryClient()
 const Routerss = () => {
 
         return (
+                <ErrorBoundary>
                 <QueryClientProvider client={queryClient}>
-                        <Routes>
+                        {/* <Support> */}
+                                <Routes>
                                         <Route path="/" element={<LoginPage />} />
                                         <Route path="/register" element={<RegisterPage />} />
                                         <Route path="/todos" element={<AllTodos />} />
                                         <Route path="/createTodos" element={<CreateTodo />} />
-                        </Routes>
-                 </QueryClientProvider>
+                                </Routes>
+                        {/* </Support> */}
+                </QueryClientProvider>
+                </ErrorBoundary>
         )
 }
 
