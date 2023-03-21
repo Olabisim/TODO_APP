@@ -18,7 +18,7 @@ export const createTodo = catchAsync(async (req, res, next) => {
         });
       
         res.status(201).json({
-                status: 'success',
+                status: true,
                 data: {
                         newTodo,
                 },
@@ -34,7 +34,7 @@ export const getAllTodo = catchAsync(async (req, res, next) => {
         if(!newTodo) return res.status(404).json({status: false, message: "cannot find todo"})
       
         res.status(200).json({
-                status: 'success',
+                status: true,
                 data: {
                         newTodo,
                 },
@@ -52,7 +52,7 @@ export const UpdateTodo = catchAsync(async (req, res, next) => {
         if(!updateTodo) return res.status(400).json({status: false, message: "cannot update todo"})
       
         res.status(200).json({
-                status: 'success',
+                status: true,
                 data: {
                         updateTodo,
                 },
@@ -69,7 +69,7 @@ export const deleteTodo = catchAsync(async (req, res, next) => {
         if(!deleteTodo) return res.status(400).json({status: false, message: "cannot delete todo"})
       
         res.status(200).json({
-                status: 'success',
+                status: true,
                 data: {
                         deleteTodo,
                 },
