@@ -17,6 +17,22 @@ export const createTodo = catchAsync(async (req, res, next) => {
                 completed
         });
       
+        res.status(201).json({
+                status: 'success',
+                data: {
+                        newTodo,
+                },
+        });
+});
+
+export const getAllTodo = catchAsync(async (req, res, next) => {
+          console.log('here1');
+        
+
+        const newTodo = await Todo.find({});
+
+        if(!newTodo) return res.status(404).json({status: false, message: "cannot find todo"})
+      
         res.status(200).json({
                 status: 'success',
                 data: {
