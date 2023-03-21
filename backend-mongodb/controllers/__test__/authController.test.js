@@ -106,3 +106,57 @@ it('sets a cookie after successful signup', async () => {
 
   expect(response.get('Set-Cookie')).toBeDefined();
 });
+
+//
+
+// LOGIN
+
+it('fails when a email that does not exist is supplied', async () => {
+  await request(app)
+    .post('/login')
+    .send({
+      email: 'testuser@test.com',
+      password: 'password',
+    })
+    .expect(401);
+});
+
+it('fails when an incorrect password is supplied', async () => {
+  await request(app)
+    .post('/signup')
+    .send({
+      name: 'test',
+      email: 'testuser@test.com',
+      password: 'password',
+    })
+    .expect(201);
+
+  await request(app)
+    .post('/login')
+    .send({
+      email: 'testuser@test.com',
+      password: 'aslkdfjalskdfj',
+    })
+    .expect(401);
+});
+
+it('responds with a cookie when given valid credentials', async () => {
+  await request(app)
+    .post('/signup')
+    .send({
+      name: 'test',
+      email: 'testuser@test.com',
+      password: 'password',
+    })
+    .expect(201);
+
+  const response = await request(app)
+    .post('/login')
+    .send({
+      email: 'testuser@test.com',
+      password: 'password',
+    })
+    .expect(200);
+
+  expect(response.get('Set-Cookie')).toBeDefined();
+});
