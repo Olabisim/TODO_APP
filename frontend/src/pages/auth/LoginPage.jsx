@@ -4,7 +4,7 @@ import {AiTwotoneAlert} from 'react-icons/ai'
 import { Link } from "react-router-dom"
 import { useQuery } from "react-query"
 import { useState } from "react"
-// import { toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import {useNavigate} from 'react-router-dom'
 import { useAppDispatch } from "../../app/hooks"
 import { setUser } from "../../features/user/userSlice"
@@ -43,11 +43,11 @@ export const LoginPage = () => {
         if(data?.status) {
                 dispatch(setUser(data.data))
                 navigate('/todos')
-                // toast.success(data?.data.message)
+                toast.success(data?.data.message)
         }
 
         if(data?.status === false) {
-                // toast.error(data?.data.message)
+                toast.error(data?.message)
         }
 
 

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState} from 'react'
 import {Link} from 'react-router-dom'
 import { getAllTodos } from '../../utils'
 import { AiTwotoneAlert } from 'react-icons/ai'
+import { toast } from 'react-toastify'
 
 export const AllTodos = () => {
 
@@ -11,6 +12,12 @@ export const AllTodos = () => {
         const [completed, setCompleted] = useState('')
 
         const {isLoading, error, data, refetch} = useQuery('alltodos', getAllTodos)
+
+        if(data?.err) toast.error("error while fetching all APIs, please refresh")
+        if(data?.success) toast.success("sucessfully fetched all APIs")
+
+        console.log("data")
+        console.log(data)
         
         let options = {
                 method: 'POST',
@@ -36,26 +43,27 @@ export const AllTodos = () => {
                 fetch('http://localhost:8080/todos', options).then(res=> res.json())
         ), {enabled: false})
 
+        if(data2?.err) toast.error("error while creating a Todo, please refresh")
+        if(data2?.success) toast.success("sucessfully fetched all APIs")
         
         const { isLoading: isLoading3, error:error3, mutate, isSuccess: isSuccess3, data:data3} = useMutation( (id:any) => (
                 fetch(`http://localhost:8080/todos/${id}`, options2).then(res=> res.json())
         ))
 
+        if(data3?.err) toast.error("error while fetching all APIs, please refresh")
+        if(data3?.success) toast.success("sucessfully fetched all APIs")
 
         const handleSubmit = () => {
+                setTitle('')
                 refetch2()
                 refetch()
-                setTitle('a')
         }
 
         useEffect(() => {
                 if(isSuccess3 === true) refetch()
 
-        }, [isSuccess3])
+        }, [isSuccess3, refetch])
 
-
-        console.log("isLoading3")
-        console.log(isLoading3)
 
 
         return (
@@ -82,7 +90,7 @@ export const AllTodos = () => {
                                         {
                                         data?.length !== 0 
                                         &&
-                                        data?.newTodo.map((each:{title: string, completed: string, _id: any}) => (
+                                        data?.newTodo?.map((each:{title: string, completed: string, _id: any}) => (
                                                 <div key={each._id}>
                                                         
                                                         {/* {each.completed} */}
