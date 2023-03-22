@@ -8,7 +8,7 @@ const todoSchema = new mongoose.Schema({
         },
         completed: {
                 type: String,
-                required: [true, 'Please add completed status!'],
+                default: 'false'
         }
 });
 

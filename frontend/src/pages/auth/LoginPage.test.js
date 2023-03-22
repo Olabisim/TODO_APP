@@ -1,7 +1,7 @@
 import React from 'react';
+// import axios from 'axios';
 import { render, waitFor, screen } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
-import axios from 'axios';
 // import LoginPage from './LoginPage';
 import { LoginPage } from './LoginPage';
 import { useQuery } from 'react-query' 
@@ -18,7 +18,7 @@ describe('LoginPage', () => {
       render(<LoginPage />);
       await new Promise(resolve => setTimeout(resolve, 0));
     });
-    expect(axios.get).toHaveBeenCalledWith('/api/data');
+    expect(fetch.get).toHaveBeenCalledWith('/api/data');
   });
 
   it('returns the correct data from the useQuery hook', async () => {

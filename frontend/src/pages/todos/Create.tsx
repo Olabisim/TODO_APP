@@ -12,7 +12,6 @@ export const CreateTodo = () => {
 
         console.log(title, completed)
 
-        const navigate = useNavigate()
 
         let options = {
                 method: 'POST',
@@ -35,7 +34,6 @@ export const CreateTodo = () => {
         console.log(data)
 
         if(data?.status) {
-                navigate('/todos')
         }
 
         return (
